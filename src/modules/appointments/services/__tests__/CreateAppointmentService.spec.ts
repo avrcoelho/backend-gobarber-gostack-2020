@@ -33,7 +33,7 @@ describe('CreateAppointment', () => {
 
     // rejects: espera que a promise seja rejeitada
     // toBeInstanceOf: seja uma instacia de AppError
-    expect(
+    await expect(
       createAppointment.execute({
         date: appointmentDate,
         provider_id: '12346544564',
