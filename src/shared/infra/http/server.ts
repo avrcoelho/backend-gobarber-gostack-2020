@@ -18,7 +18,7 @@ app.use(
   }),
 );
 app.use(express.json());
-app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.uploadFolder));
 app.use(routes);
 
 app.use(
