@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
+// classToClass: vai aplicar o Exclude e o Expose que foi configurado no Model
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
@@ -14,8 +16,6 @@ export default class UsersController {
       password,
     });
 
-    delete user.password;
-
-    return response.json({ user, token });
+    return response.json({ user: classToClass(user), token });
   }
 }
