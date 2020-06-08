@@ -1,17 +1,17 @@
-import { Request, Response, NextFunction, request } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
 }
 
 export default function ensureAuthenticated(
-  resquest: Request,
+  request: Request,
   response: Response,
   next: NextFunction,
 ): void {
@@ -30,7 +30,7 @@ export default function ensureAuthenticated(
   try {
     const decoded = verify(token, secret);
 
-    const { sub } = decoded as TokenPayload;
+    const { sub } = decoded as ITokenPayload;
 
     request.user = {
       id: sub,
